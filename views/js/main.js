@@ -555,7 +555,7 @@ function updatePositions() {
     var phase = phaseNums[i%5];
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
-  
+}
   
 // Moves the sliding background pizzas based on scroll position
 //function updatePositions() {
