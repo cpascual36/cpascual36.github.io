@@ -449,8 +449,6 @@ var resizePizzas = function(size) {
   }
   // Iterates through pizza elements on the page and changes their widths
 
-  // Iterates through pizza elements on the page and changes their widths
-
    function changePizzaSizes(size) {
       var allPizzaContainers = document.getElementsByClassName("randomPizzaContainer"); 
       var dx = determineDx(allPizzaContainers[0], size); 
@@ -498,46 +496,11 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
   console.log("Average time to generate last 10 frames: " + sum / 10 + "ms");
 }
 
-// The following code for sliding background pizzas was pulled from Ilya's demo found at:
-// https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
-// Moves the sliding background pizzas based on scroll position
-//function updatePositions() {
-//  frame++;
-//window.performance.mark("mark_start_frame");
-
-//  var items = document.querySelectorAll('.mover');
- // for (var i = 0; i < items.length; i++) {
-//    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-//    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-//  }
-
-//function updatePositions() {
-//  frame++;
-//  window.performance.mark("mark_start_frame");
-//  var items = document.getElementsByClassName('mover');
-//  var cachedScrollTop = document.body.scrollTop;
-//  for (var i = 0; i < items.length; i++) {
-//    var phase = Math.sin((cachedScrollTop / 1250) + (i % 5));
-//  items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-//  }
-//function updatePositions() {
-  //frame++;
-  //window.performance.mark("mark_start_frame");
-//  var items = document.getElementsByClassName('mover');
-  //var top = (document.body.scrollTop / 1250);
-
-//  for (var i = 0; i < items.length; i++) {
-  //  var phase = Math.sin( top + (i % 5));
-//items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-//}
-// Moves the sliding background pizzas based on scroll position
-//cache items
 // Moves the sliding background pizzas based on scroll position
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
-// Moves the sliding background pizzas based on scroll position
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
