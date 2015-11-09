@@ -534,46 +534,33 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // Moves the sliding background pizzas based on scroll position
 //cache items
 // Moves the sliding background pizzas based on scroll position
+// The following code for sliding background pizzas was pulled from Ilya's demo found at:
+// https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
+
+// Moves the sliding background pizzas based on scroll position
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
-  // calculate number based on scroll position, same for all pizzas
-  var bodyNum = (document.body.scrollTop / 1250);
-  // calculate phase number for all possible outcomes of n % 5
-  var phaseNums = [
-                    Math.sin(bodyNum + 0),
-                    Math.sin(bodyNum + 1),
-                    Math.sin(bodyNum + 2),
-                    Math.sin(bodyNum + 3),
-                    Math.sin(bodyNum + 4)
-                  ];
+  var items = document.getElementsByClassName('mover');
+
+  var top = document.body.scrollTop / 1250;
+  var phase;
 
   for (var i = 0; i < items.length; i++) {
-    // set correct phase number based on i % 5
-    var phase = phaseNums[i%5];
+    phase = Math.sin(top + i % 5);
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
-}
-  
-// Moves the sliding background pizzas based on scroll position
-//function updatePositions() {
-//  frame++;
-//  window.performance.mark("mark_start_frame");
-  // Use document.getElementsByClassName to access DOM elements.
-//  var items = document.getElementsByClassName('mover');
-  // Move the calcualtion outside the for loop.
-//  var scrollTop = document.body.scrollTop / 1250;
-//  var phase = [];
-//  for (var i = 0; i < 5; i++) {
-//    phase[i] = 100 * Math.sin(scrollTop + i);
-//  }
-//  for (var i = 0; i < items.length; i++) {
-//    items[i].style.left = items[i].basicLeft + phase[i % 5] + 'px';
 
-//  }
-//}
+  // User Timing API to the rescue again. Seriously, it's worth learning.
+  // Super easy to create custom metrics.
+  window.performance.mark("mark_end_frame");
+  window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame");
+  if (frame % 10 === 0) {
+    var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
+    logAverageFrame(timesToUpdatePosition);
+  }
+}
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
 
