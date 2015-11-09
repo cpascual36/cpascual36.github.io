@@ -546,7 +546,7 @@ function updatePositions() {
     // This generates the same five values which were always repeating in the
     // longer loop, and places them in `constArray`, which holds these five
     // constant, repeating values:
-  for (var i = 0; i < 200; i++) {
+  for (var i = 0; i < 5; i++) {
     constArray.push(Math.sin((top / 1250) + i));
   }
     // Now this for-loop can get the usual value for phase by pulling it out of
