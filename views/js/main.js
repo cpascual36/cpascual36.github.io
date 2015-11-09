@@ -557,9 +557,6 @@ function updatePositions() {
         var phase = constArray[i % 5];
         items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
     }
-}
-
-
 
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
