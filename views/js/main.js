@@ -540,35 +540,21 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 //}
 function updatePositions() {
     frame++;
-
-    // You can optimize further by allowing `items` to be created and assigned
-    // at a higher, longer-lived scope than `updatePositions`, because `items`
-    // will never be a different value at any point in time after the "mover"
-    // pizzas have been placed on the page:
     var items = document.getElementsByClassName('mover');
-
     var top = document.body.scrollTop;
-
     var constArray = [];
-
-    var i;
-
-
     // This generates the same five values which were always repeating in the
     // longer loop, and places them in `constArray`, which holds these five
     // constant, repeating values:
-    for (i = 0; i < 5; i++) {
+    for (var i = 0; i < 200; i++) {
       constArray.push(Math.sin((top / 1250) + i));
     }
-
-
     // Now this for-loop can get the usual value for phase by pulling it out of
     // the constant array. This works because the non-optimal code was doing a
     // lot of work just to calculate and re-calculate and re-calculate the same
     // five values we stored in the constant array.
-    for (i = 0; i < items.length; i++) {
+    for (var i = 0; i < items.length; i++) {
         var phase = constArray[i % 5];
-
         items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
     }
 }
