@@ -533,24 +533,28 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 //}
 // Moves the sliding background pizzas based on scroll position
 //cache items
-
-var cacheItems = null;
-function getItems() {
-  if (cacheItems) return cacheItems; 
-  cacheItems = document.getElementsByClassName('mover');
-  return cacheItems;
-}
+// Moves the sliding background pizzas based on scroll position
 function updatePositions() {
   frame++;
-var items = getItems();
-  var top = document.body.scrollTop / 1250;
-  var phase;
-  var l = items.length;
-  for (var i = 0, l < items.length;  i++) {
-    phase = Math.sin(top + (i % 5));
+  window.performance.mark("mark_start_frame");
+
+  var items = document.querySelectorAll('.mover');
+  // calculate number based on scroll position, same for all pizzas
+  var bodyNum = (document.body.scrollTop / 1250);
+  // calculate phase number for all possible outcomes of n % 5
+  var phaseNums = [
+                    Math.sin(bodyNum + 0),
+                    Math.sin(bodyNum + 1),
+                    Math.sin(bodyNum + 2),
+                    Math.sin(bodyNum + 3),
+                    Math.sin(bodyNum + 4)
+                  ];
+
+  for (var i = 0; i < items.length; i++) {
+    // set correct phase number based on i % 5
+    var phase = phaseNums[i%5];
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
-}
   
   
 // Moves the sliding background pizzas based on scroll position
