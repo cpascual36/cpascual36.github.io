@@ -539,33 +539,23 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 //items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
 //}
 function updatePositions() {
-    frame++;
-    var items = document.getElementsByClassName('mover');
-    var top = document.body.scrollTop;
-    var constArray = [];
+  frame++;
+  var items = document.getElementsByClassName('mover');
+  var top = document.body.scrollTop;
+  var constArray = [];
     // This generates the same five values which were always repeating in the
     // longer loop, and places them in `constArray`, which holds these five
     // constant, repeating values:
-    for (var i = 0; i < 200; i++) {
-      constArray.push(Math.sin((top / 1250) + i));
-    }
+  for (var i = 0; i < 200; i++) {
+    constArray.push(Math.sin((top / 1250) + i));
+  }
     // Now this for-loop can get the usual value for phase by pulling it out of
     // the constant array. This works because the non-optimal code was doing a
     // lot of work just to calculate and re-calculate and re-calculate the same
     // five values we stored in the constant array.
-    for (var i = 0; i < items.length; i++) {
+  for (var i = 0; i < items.length; i++) {
         var phase = constArray[i % 5];
         items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-    }
-
-
-  // User Timing API to the rescue again. Seriously, it's worth learning.
-  // Super easy to create custom metrics.
-  window.performance.mark("mark_end_frame");
-  window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame");
-  if (frame % 10 === 0) {
-    var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
-    logAverageFrame(timesToUpdatePosition);
   }
 }
 
