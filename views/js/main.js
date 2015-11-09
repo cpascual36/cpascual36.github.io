@@ -545,10 +545,9 @@ function updatePositions() {
  
 
 var items = getItems();
-//change before resubmit based on review
   var top = document.body.scrollTop / 1250;
   var phase;
-  for (var i = 0, i< items.length; i < l; i++) {
+  for (var i = 0, i< items.length;  i++) {
     phase = Math.sin(top + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
