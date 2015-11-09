@@ -448,26 +448,19 @@ var resizePizzas = function(size) {
     return dx;
   }
   // Iterates through pizza elements on the page and changes their widths
-  function changePizzaSizes(size) {
-//      //Remove variables using offsetWidth from the for loop to prevent repeatedly recalculating it due to reflow-repaint cycle
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-//      //Stop recounting pizzas by removing from for loop and creating pizzacount variable
-      var pizzacount = document.querySelectorAll(".randomPizzaContainer").length;
-    for (var i = 0; i < pizzacount; i++) {
-      // remove the slower querySelectorAll and replace with getElementsByClassName
-      document.getElementsByClassName("randomPizzaContainer")[i].style.width = newwidth;
+
+  // Iterates through pizza elements on the page and changes their widths
+
+   function changePizzaSizes(size) {
+      var allPizzaContainers = document.getElementsByClassName("randomPizzaContainer"); 
+      var dx = determineDx(allPizzaContainers[0], size); 
+      var newwidth = (allPizzaContainers[0].offsetWidth + dx) + 'px'; 
+  
+    for (var i = 0, l= allPizzaContainers.length; i < l; i++) {
+      allPizzaContainers[i].style.width = newwidth;
     }
   }
-  // Iterates through pizza elements on the page and changes their widths
-  function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
-    }
-}
-
+  changePizzaSizes(size);
 
 
   // User Timing API is awesome
