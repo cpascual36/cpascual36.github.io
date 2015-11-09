@@ -555,6 +555,7 @@ function updatePositions() {
     items[i].style.left = items[i].basicLeft + phase[i % 5] + 'px';
 
   }
+}
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
 
