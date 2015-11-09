@@ -539,19 +539,18 @@ function getItems() {
   if (cacheItems) return cacheItems; 
   cacheItems = document.getElementsByClassName('mover');
   return cacheItems;
-  }
+}
 function updatePositions() {
   frame++;
- 
-
 var items = getItems();
   var top = document.body.scrollTop / 1250;
   var phase;
-  for (var i = 0, i< items.length;  i++) {
+  var l = items.length;
+  for (var i = 0, l < items.length;  i++) {
     phase = Math.sin(top + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
-} 
+}
   
   
 // Moves the sliding background pizzas based on scroll position
