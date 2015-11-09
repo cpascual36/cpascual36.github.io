@@ -531,24 +531,47 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
   //  var phase = Math.sin( top + (i % 5));
 //items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
 //}
-
 // Moves the sliding background pizzas based on scroll position
+//cache items
+
+var cacheItems = null;
+function getItems() {
+  if (cacheItems) return cacheItems; 
+  cacheItems = document.getElementsByClassName('mover');
+  return cacheItems;
+  }
 function updatePositions() {
   frame++;
-  window.performance.mark("mark_start_frame");
-  // Use document.getElementsByClassName to access DOM elements.
-  var items = document.getElementsByClassName('mover');
-  // Move the calcualtion outside the for loop.
-  var scrollTop = document.body.scrollTop / 1250;
-  var phase = [];
-  for (var i = 0; i < 5; i++) {
-    phase[i] = 100 * Math.sin(scrollTop + i);
-  }
-  for (var i = 0; i < items.length; i++) {
-    items[i].style.left = items[i].basicLeft + phase[i % 5] + 'px';
+ 
 
+var items = getItems();
+//change before resubmit based on review
+  var top = document.body.scrollTop / 1250;
+  var phase;
+  for (var i = 0, i< items.length; i < l; i++) {
+    phase = Math.sin(top + (i % 5));
+    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
-}
+  
+  
+  
+// Moves the sliding background pizzas based on scroll position
+//function updatePositions() {
+//  frame++;
+//  window.performance.mark("mark_start_frame");
+  // Use document.getElementsByClassName to access DOM elements.
+//  var items = document.getElementsByClassName('mover');
+  // Move the calcualtion outside the for loop.
+//  var scrollTop = document.body.scrollTop / 1250;
+//  var phase = [];
+//  for (var i = 0; i < 5; i++) {
+//    phase[i] = 100 * Math.sin(scrollTop + i);
+//  }
+//  for (var i = 0; i < items.length; i++) {
+//    items[i].style.left = items[i].basicLeft + phase[i % 5] + 'px';
+
+//  }
+//}
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
 
