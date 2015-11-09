@@ -538,27 +538,23 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
   //  var phase = Math.sin( top + (i % 5));
 //items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
 //}
+
+// Moves the sliding background pizzas based on scroll position
 function updatePositions() {
   frame++;
+  window.performance.mark("mark_start_frame");
+  // Use document.getElementsByClassName to access DOM elements.
   var items = document.getElementsByClassName('mover');
-  var top = document.body.scrollTop;
-  var constArray = [];
-    // This generates the same five values which were always repeating in the
-    // longer loop, and places them in `constArray`, which holds these five
-    // constant, repeating values:
+  // Move the calcualtion outside the for loop.
+  var scrollTop = document.body.scrollTop / 1250;
+  var phase = [];
   for (var i = 0; i < 5; i++) {
-    constArray.push(Math.sin((top / 1250) + i));
+    phase[i] = 100 * Math.sin(scrollTop + i);
   }
-    // Now this for-loop can get the usual value for phase by pulling it out of
-    // the constant array. This works because the non-optimal code was doing a
-    // lot of work just to calculate and re-calculate and re-calculate the same
-    // five values we stored in the constant array.
   for (var i = 0; i < items.length; i++) {
-        var phase = constArray[i % 5];
-        items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-  }
-}
+    items[i].style.left = items[i].basicLeft + phase[i % 5] + 'px';
 
+  }
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
 
