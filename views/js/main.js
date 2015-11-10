@@ -447,15 +447,14 @@ var resizePizzas = function(size) {
     return dx;
   }  // Iterates through pizza elements on the page and changes their widths
   // Remove variables from for loop
-
+ // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
- 
-  	  var dx = determineDx(document.getElementsByClassName("randomPizzaContainer")[1], size);
-      var newwidth = (document.getElementsByClassName("randomPizzaContainer")[1].offsetWidth + dx) + 'px';
-  	  var pizzacount = document.getElementsByClassName("randomPizzaContainer").length;
-  	
+  	  var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[1], size);
+      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[1].offsetWidth + dx) + 'px';
+  	  var pizzacount = document.querySelectorAll(".randomPizzaContainer").length;
+
     for (var i = 0; i < pizzacount; i++) {
- 
+
      // previously the slower document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
      document.getElementsByClassName("randomPizzaContainer")[i].style.width = newwidth;
    }
@@ -473,7 +472,7 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
-for (var i = 2; i < 50; i++) {
+for (var i = 2; i < 100; i++) {
   var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
@@ -497,23 +496,52 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
   }
   console.log("Average time to generate last 10 frames: " + sum / 10 + "ms");
 }
-// Moves the sliding background pizzas based on scroll position
-// Move calculation of variables outside of for loop
-function updatePositions() {
 
+// The following code for sliding background pizzas was pulled from Ilya's demo found at:
+// https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
+
+// Moves the sliding background pizzas based on scroll position
+function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
-
   var items = document.getElementsByClassName('mover');
+  var cachedScrollTop = document.body.scrollTop/1250;
 
-  var top = document.body.scrollTop / 1250;
-  var phase;
-  
   for (var i = 0; i < items.length; i++) {
-    phase = Math.sin(top + (i % 5));
-     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    var phase = Math.sin((cachedScrollTop) + (i % 5));
+ // console.log(items[i].basicLeft);
+  items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+  //items[i].style.left = (i%8)*256 + 100 * phase + 'px';
+  //items[i].style.transform = "translateX(items[i].basicLeft + 100 * phase + 'px')";
+//  console.log(items[i].basicLeft);
+    // replaced items[i].style.transform = "translateX(items[i].basicLeft + 100 * phase + 'px')";  with above line
   }
-}
+
+/*
+ sample from slashdot.  need to replace stlye w/ translate.
+box.style.transform = "translateX(200px)";
+vs
+box.style.left = "200px";
+
+  */
+
+ /*Here is the original code from igvita.com
+
+        function updatePositions() {
+            var heavyScroll = !!document.querySelector('#heavy-scroll').checked;
+            var items = document.querySelectorAll('.mover');
+            var cachedScrollTop = document.body.scrollTop;
+            for (var i = 0; i < items.length; i++) {
+                var phase;
+                if (heavyScroll) phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+                else
+                    phase = Math.sin((cachedScrollTop / 1250) + (i % 5));
+                items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+            }
+        }
+  * */
+
+
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
   window.performance.mark("mark_end_frame");
@@ -530,15 +558,15 @@ window.addEventListener('scroll', updatePositions);
 // Generates the sliding pizzas when the page loads.AND IS SLOWING FPS!!!
 //was document.addEventListener('DOMContentLoaded', function() {
 // only need to make the pizzas one time.
-document.addEventListener('DOMContentLoaded', function() {	
+document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 50; i++) {
+  for (var i = 0; i < 100; i++) {
   	console.log(i);
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
- //   elem.style.height = "100px";
+    elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
@@ -549,4 +577,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 document.addEventListener('DOMContentLoaded', function() {console.log("dom content loaded");});
+
+
 
