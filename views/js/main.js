@@ -457,7 +457,20 @@ function changePizzaSizes(size) {
     }
   }
   changePizzaSizes(size);
+  function changePizzaSizes(size) {
+ 
+  	  var dx = determineDx(document.getElementsByClassName("randomPizzaContainer")[1], size);
+      var newwidth = (document.getElementsByClassName("randomPizzaContainer")[1].offsetWidth + dx) + 'px';
+  	  var pizzacount = document.getElementsByClassName("randomPizzaContainer").length;
+  	
+    for (var i = 0; i < pizzacount; i++) {
+ 
+     // previously the slower document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+     document.getElementsByClassName("randomPizzaContainer")[i].style.width = newwidth;
+   }
+  }
 
+  changePizzaSizes(size);
 
 
 
