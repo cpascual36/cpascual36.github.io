@@ -510,12 +510,13 @@ function updatePositions() {
   var phase;
   var phaseCache = [];
   for (var i = 0; i < items.length; i++) {
-    phaseCache = Math.sin(top + (i % 5));
+    phase = Math.sin(top + (i % 5));
+    phaseCache.push(phase);
   }
 
   for (var i = 0; i < items.length; i++) {
    // phase = Math.sin(top + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phaseCache[] + 'px';
+    items[i].style.left = items[i].basicLeft + 100 * phaseCache[i] + 'px';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
