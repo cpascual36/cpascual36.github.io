@@ -425,7 +425,6 @@ var resizePizzas = function(size) {
     var oldwidth = elem.offsetWidth;
     var windowwidth = document.querySelector("#randomPizzas").offsetWidth;
     var oldsize = oldwidth / windowwidth;
-
     // TODO: change to 3 sizes? no more xl?
     // Changes the slider value to a percent width
     function sizeSwitcher (size) {
@@ -440,13 +439,11 @@ var resizePizzas = function(size) {
           console.log("bug in sizeSwitcher");
       }
     }
-
     var newsize = sizeSwitcher(size);
     var dx = (newsize - oldsize) * windowwidth;
-
     return dx;
   }
-
+}
   // Iterates through pizza elements on the page and changes their widths
   // Remove variables from for loop
    function changePizzaSizes(size) {
@@ -474,7 +471,7 @@ var resizePizzas = function(size) {
 for (var i = 2; i < 50; i++) {
   var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
-}
+  }
 
 // User Timing API again. These measurements tell you how long it took to generate the initial pizzas
 //window.performance.mark("mark_end_generating");
@@ -494,6 +491,7 @@ for (var i = 2; i < 50; i++) {
 //    sum = sum + times[i].duration;
 //  }
 //  console.log("Average time to generate last 10 frames: " + sum / 10 + "ms");
+
 //}
 
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
