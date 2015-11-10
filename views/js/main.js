@@ -446,18 +446,22 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   // Remove variables from for loop
-   function changePizzaSizes(size) {
-    //var dx = determineDx(allPizzaContainers[0], size);
-    //var newwidth = (allPizzaContainers[0].offsetWidth + dx) + 'px';
-    var allPizzaContainers = document.getElementsByClassName("randomPizzaContainer");
-    totalPizzaContainers = allPizzaContainers.length;
 
-    for (var i = 0;  i < totalPizzaContainers; i++) {
+function changePizzaSizes(size) {
+      var allPizzaContainers = document.getElementsByClassName("randomPizzaContainer");
+      var dx = determineDx(allPizzaContainers[0], size);
+      var newwidth = (allPizzaContainers[0].offsetWidth + dx) + 'px';
+
+    for (var i = 0, l= allPizzaContainers.length; i < l; i++) {
       allPizzaContainers[i].style.width = newwidth;
     }
   }
   changePizzaSizes(size);
-}
+
+
+
+
+
   // User Timing API is awesome
 //  window.performance.mark("mark_end_resize");
 //  window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
