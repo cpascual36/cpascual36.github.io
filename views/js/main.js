@@ -496,11 +496,11 @@ for (var i = 2; i < 50; i++) {
 
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
-
+  var frame = 0;
 // Moves the sliding background pizzas based on scroll position
 // Move calculation of variables outside of for loop
 function updatePositions() {
-  var frame = 0;
+
   frame++;
   window.performance.mark("mark_start_frame");
 
@@ -508,15 +508,10 @@ function updatePositions() {
 
   var top = document.body.scrollTop / 1250;
   var phase;
-  var phaseCache = [];
+  
   for (var i = 0; i < items.length; i++) {
     phase = Math.sin(top + (i % 5));
-    phaseCache.push(phase);
-  }
-
-  for (var i = 0; i < items.length; i++) {
-   // phase = Math.sin(top + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phaseCache[i] + 'px';
+     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -541,8 +536,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
-    elem.style.height = "74px";
-    elem.style.width = "73.333px";
+   // elem.style.height = "74px";
+   // elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
