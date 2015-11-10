@@ -500,6 +500,7 @@ for (var i = 2; i < 50; i++) {
 // Moves the sliding background pizzas based on scroll position
 // Move calculation of variables outside of for loop
 function updatePositions() {
+  var frame = 0;
   frame++;
   window.performance.mark("mark_start_frame");
 
