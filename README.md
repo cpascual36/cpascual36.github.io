@@ -32,7 +32,7 @@ Cam's Pizzeria page originally had FPS rate of less than 30. Chrome DevTools was
 <h5>JS</h5>
 ######function updatePositions()
 
-Removed scrollTop from for loop by caching the value before. Requests for style information should be minimized because they prevent the browser from optimizing reflows (Stoyan's phpied.com).
+Removed scrollTop from for loop by caching the value before. Requests for style information, such as scrollTop, should be minimized because they prevent the browser from optimizing reflows (Stoyan's phpied.com).
 Also replaced querySelectorAll with getElementsByClassName because it is faster (NCZonline).
 
 ######function changePizzaSizes(sizes)
