@@ -30,58 +30,14 @@ The original PageSpeed Insights score for index.html was 35/100 for mobile and 4
 ####Cam's Pizzeria
 Cam's Pizzeria page originally had FPS rate of less than 30. Chrome DevTools was used to measure the FPS timeline and debugging/optimizing the javascript. There were two major bottlenecks.
 <h5>JS</h5>
-1. function updatePositions()
-Original
-'''
-function updatePositions() {
-  frame++;
-  window.performance.mark("mark_start_frame");
+######function updatePositions()
 
-  var items = document.querySelectorAll('.mover');
-  for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-  }
-'''
-
-Optimized:  
 Removed scrollTop from for loop by caching the value before. Requests for style information should be minimized because they prevent the browser from optimizing reflows (Stoyan's phpied.com).
 Also replaced querySelectorAll with getElementsByClassName because it is faster (NCZonline).
-'''
-function updatePositions() {
-  frame++;
-  window.performance.mark("mark_start_frame");
-  var items = document.getElementsByClassName('mover');
-  var cachedScrollTop = (document.body.scrollTop/1250);
-  var len = items.length;
-  for (var i = 0; i < len; i++) {
-  var phase = Math.sin(cachedScrollTop + (i % 5));
-  items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-  }
-'''
-  
-2. function changePizzaSizes(sizes)
-Original
-'''
-  function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
-    }
-  }
-'''
-Optimized:  
-Moved variables out of the for loop to prevent unnecessary calculations. Also replaced querySelectorAll with getElementsByClassName because it is faster (NCZonline).
-'''
-  function changePizzaSizes(size) {
-  	  var dx = determineDx(document.getElementsByClassName("randomPizzaContainer")[1], size);
-      var newwidth = (document.getElementsByClassName("randomPizzaContainer")[1].offsetWidth + dx) + 'px';
-  	  var pizzacount = document.getElementsByClassName("randomPizzaContainer").length;
 
-    for (var i = 0; i < pizzacount; i++) {
-     document.getElementsByClassName("randomPizzaContainer")[i].style.width = newwidth;
-   }
+######function changePizzaSizes(sizes)
+ 
+Moved variables out of the for loop to prevent unnecessary calculations. Also replaced querySelectorAll with getElementsByClassName because it is faster (NCZonline).
 
 ####Additional Optimizations
 1. Reduce the number of pizzas from 200 to 25. The page still appears sufficiently full of pizza and yet reduces the number of items to be rendered.
@@ -90,7 +46,7 @@ Moved variables out of the for loop to prevent unnecessary calculations. Also re
 
 ####Sources
 
-* [NCZonline](https://www.nczonline.net/blog/2010/09/28/why-is-getelementsbytagname-faster-that-queryselectorall/).
+* [NCZonline](https://www.nczonline.net/blog/2010/09/28/why-is-getelementsbytagname-faster-that-queryselectorall/)
 * [Stoyan's phpied.com](http://www.phpied.com/rendering-repaint-reflowrelayout-restyle/)
 * [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
 * [Analyzing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp.html "analyzing crp")
