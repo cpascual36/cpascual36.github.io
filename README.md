@@ -15,12 +15,15 @@ https://github.com/udacity/frontend-nanodegree-mobile-portfolio
 
 ####Index Page
 The original PageSpeed Insights score for index.html was 35/100 for mobile and 47/100 for desktop. After optimizing, the scores are 95 for mobile and 96 for desktop. The following changes were made to to achieve these scores:
+
 <h5>Images</h5>
 1. Resized and compressed pizzeria.jpg using Photoshop.
 2. Losslessly compress profilepic.jpg using Photoshop.
+
 <h5>CSS</h5>
 1. For the main stylesheet, inline CSS into index.html using Gulp with Gulp-Inline plugin. This improves performance because external style sheets referenced in the head are render blocking. Inlining this small style sheet allowed the browser to proceed with rendering the page.
 2. For the print stylesheet, add the media query "print" to the script tag so that it does not block rendering.
+
 <h5>JS</h5>
 1. Because Google Analytics was not critical to the initial render of the page, the async attribute was added to the script tag. Making the script asynchronous allows the browser to render the page without waiting for the download and execution of the external script.
 
@@ -28,8 +31,33 @@ The original PageSpeed Insights score for index.html was 35/100 for mobile and 4
 Cam's Pizzeria page originally had FPS rate of less than 30. Chrome DevTools was used to measure the FPS timeline and debugging/optimizing the javascript. There were two major bottlenecks.
 <h5>JS</h5>
 1. function updatePositions()
+Original
+...
+function updatePositions() {
+  frame++;
+  window.performance.mark("mark_start_frame");
 
+  var items = document.querySelectorAll('.mover');
+  for (var i = 0; i < items.length; i++) {
+    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+  }
+  ...
 
+Optimized
+Removed cacluclations from for loop 
+...
+function updatePositions() {
+  frame++;
+  window.performance.mark("mark_start_frame");
+
+  var items = document.querySelectorAll('.mover');
+  for (var i = 0; i < items.length; i++) {
+    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+  }
+  ...
+  
 
 
 2. function changePizzaSizes(sizes)
