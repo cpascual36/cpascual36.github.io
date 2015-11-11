@@ -1,16 +1,26 @@
-## Website Performance Optimization portfolio project
+## Project 4: Website Performance Optimization 
 
-Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
+Optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible. Identify and resolve performance issues to achieve a target score of 90+ for index.html on PageSpeed Insights mobile/desktop and a consistent 60 FPS when scrolling in pizza.html. 
 
-To get started, check out the repository, inspect the code,
+###File Structure
+src/
+Contains development CSS, JS, and images, sorted into respective directories.
+dest/
+Contains the production ready CSS, JS, and images built from the src/ files.
 
-### Getting started
+###Build
+The Gulp task runner was used to inline csss.
 
-####Part 1: Optimize PageSpeed Insights score for index.html
+###Optimization
 
-Some useful tips to help you get started:
+####Index Page
+The original PageSpeed Insights score for index.html was 35/100 for mobile and 47/100 for desktop. After optimizing the scores are 93 for mobile and 97 for desktop.
 
-1. Check out the repository
+The following changes were made to to achieve these scores:
+
+1. Optimized code can be run from the dest folder.
+
+
 1. To inspect the site on your phone, you can run a local server
 
   ```bash
