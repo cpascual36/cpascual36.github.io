@@ -452,6 +452,8 @@ var pizzaElementGenerator = function(i) {
  // Optimized by switching to getElementsByClassName from querySelectorAll and
  // moved variables out of the for loop to prevent unnecessary recalculations
   function changePizzaSizes(size) {
+    
+    
   	  var dx = determineDx(document.getElementsByClassName("randomPizzaContainer")[1], size);
       var newwidth = (document.getElementsByClassName("randomPizzaContainer")[1].offsetWidth + dx) + 'px';
   	  var pizzacount = document.getElementsByClassName("randomPizzaContainer").length;
@@ -475,7 +477,7 @@ var pizzaElementGenerator = function(i) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
-for (var i = 2; i < 50; i++) {
+for (var i = 2; i < 30; i++) {
   var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
@@ -564,7 +566,7 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 50; i++) {
+  for (var i = 0; i < 30; i++) {
   	console.log(i);
     var elem = document.createElement('img');
     elem.className = 'mover';
