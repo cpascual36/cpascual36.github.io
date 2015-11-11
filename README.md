@@ -49,10 +49,11 @@ Moved variables out of the for loop to prevent unnecessary calculations. Also re
 * [NCZonline](https://www.nczonline.net/blog/2010/09/28/why-is-getelementsbytagname-faster-that-queryselectorall/)
 * [Stoyan's phpied.com](http://www.phpied.com/rendering-repaint-reflowrelayout-restyle/)
 * [Faster Websites: Crash Course on Web Performance](https://www.igvita.com/2013/01/15/faster-websites-crash-course-on-web-performance/)
+* [Optimizing Images](https://helpx.adobe.com/photoshop-elements/using/optimizing-images.html)
 * [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
 * [Analyzing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp.html "analyzing crp")
 * [Optimizing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/optimizing-critical-rendering-path.html "optimize the crp!")
 * [Avoiding Rendering Blocking CSS](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css.html "render blocking css")
-* [Optimizing Images](<a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization.html">Optimize images)
+
 
 
