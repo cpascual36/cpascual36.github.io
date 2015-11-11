@@ -1,36 +1,46 @@
-## Website Performance Optimization portfolio project
+## Project 4: Website Performance Optimization 
 
-Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
+Goal:  Given the provided website, optimize the critical rendering path and make the page render as quickly as possible. Identify and resolve performance issues to achieve a target score of 90+ for index.html on PageSpeed Insights mobile/desktop and a consistent 60 FPS when scrolling in pizza.html. 
 
-To get started, check out the repository, inspect the code,
+###File Structure
+<h6>src/</h6>
+Contains development CSS, JS, and images, sorted into respective directories.
+<h6>dest/</h6>
+Contains the production ready CSS, JS, and images built from the src/ files.
 
-### Getting started
+###Original Files
+https://github.com/udacity/frontend-nanodegree-mobile-portfolio
 
-####Part 1: Optimize PageSpeed Insights score for index.html
+###Optimization
 
-Some useful tips to help you get started:
+####Index Page
+The original PageSpeed Insights score for index.html was 35/100 for mobile and 47/100 for desktop. After optimizing, the scores are 95 for mobile and 96 for desktop. The following changes were made to to achieve these scores:
+<h5>Images</h5>
+1. Resized and compressed pizzeria.jpg using Photoshop.
+2. Losslessly compress profilepic.jpg using Photoshop.
+<h5>CSS</h5>
+1. For the main stylesheet, inline CSS into index.html using Gulp with Gulp-Inline plugin. This improves performance because external style sheets referenced in the head are render blocking. Inlining this small style sheet allowed the browser to proceed with rendering the page.
+2. For the print stylesheet, add the media query "print" to the script tag so that it does not block rendering.
+<h5>JS</h5>
+1. Because Google Analytics was not critical to the initial render of the page, the async attribute was added to the script tag. Making the script asynchronous allows the browser to render the page without waiting for the download and execution of the external script.
 
-1. Check out the repository
-1. To inspect the site on your phone, you can run a local server
+####Cam's Pizzeria
+Cam's Pizzeria page originally had FPS rate of less than 30. Chrome DevTools was used to measure the FPS timeline and debugging/optimizing the javascript. There were two major bottlenecks.
+<h5>JS</h5>
+1. function updatePositions()
 
-  ```bash
-  $> cd /path/to/your-project-folder
-  $> python -m SimpleHTTPServer 8080
-  ```
 
-1. Open a browser and visit localhost:8080
-1. Download and install [ngrok](https://ngrok.com/) to make your local server accessible remotely.
 
-  ``` bash
-  $> cd /path/to/your-project-folder
-  $> ngrok 8080
-  ```
 
-1. Copy the public URL ngrok gives you and try running it through PageSpeed Insights! Optional: [More on integrating ngrok, Grunt and PageSpeed.](http://www.jamescryer.com/2014/06/12/grunt-pagespeed-and-ngrok-locally-testing/)
+2. function changePizzaSizes(sizes)
 
-Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
 
-####Part 2: Optimize Frames per Second in pizza.html
+####Additional Optimizations
+1. Reduce the number of pizzas
+2. Remove height and width from generated pizza elements
+3. 
+
+####Sources
 
 To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js. 
 
