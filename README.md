@@ -1,9 +1,9 @@
 ## Project 4: Website Performance Optimization 
 
-Optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible. Identify and resolve performance issues to achieve a target score of 90+ for index.html on PageSpeed Insights mobile/desktop and a consistent 60 FPS when scrolling in pizza.html. 
+Given the provided website, optimize the critical rendering path and make the page render as quickly as possible. Identify and resolve performance issues to achieve a target score of 90+ for index.html on PageSpeed Insights mobile/desktop and a consistent 60 FPS when scrolling in pizza.html. 
 
 ###File Structure
-src/
+<h6>src/</h6>
 Contains development CSS, JS, and images, sorted into respective directories.
 dest/
 Contains the production ready CSS, JS, and images built from the src/ files.
@@ -14,7 +14,7 @@ The Gulp task runner was used to inline csss.
 ###Optimization
 
 ####Index Page
-The original PageSpeed Insights score for index.html was 35/100 for mobile and 47/100 for desktop. After optimizing the scores are 93 for mobile and 97 for desktop.
+The original PageSpeed Insights score for index.html was 35/100 for mobile and 47/100 for desktop. After optimizing the scores are 95 for mobile and 96 for desktop.
 
 The following changes were made to to achieve these scores:
 
