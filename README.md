@@ -43,7 +43,8 @@ Moved variables out of the for loop to prevent unnecessary calculations. Also re
 1. Reduce the number of pizzas from 200 to 25. The page still appears sufficiently full of pizza and yet reduces the number of items to be rendered.
 2. Remove height and width from generated pizza elements and move width to CSS.
 3. Cropped and compressed pizza.png. The height of the image was far larger than width but only contained empty space.
-4. Use Gulp UnCSS to remove unused CSS from the bootstrap-grid.css file.
+4. Created pizzmover.png from pizza.png by resizing it to 73px wide. Pizzamover.png is now the picture that the background pizzas are pulled from because the browser is set to display them at 73 pixels and rather than relying on the browser to re-size them it now just pulls a picture that is correctly sized.
+5. Use Gulp UnCSS to remove unused CSS from the bootstrap-grid.css file.
 
 ####Sources
 
