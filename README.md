@@ -42,7 +42,8 @@ Moved variables out of the for loop to prevent unnecessary calculations. Also re
 ####Additional Optimizations
 1. Reduce the number of pizzas from 200 to 25. The page still appears sufficiently full of pizza and yet reduces the number of items to be rendered.
 2. Remove height and width from generated pizza elements and move width to CSS.
-3. Edited and compressed pizza.png. The height of the image was far larger than width but only contained empty space.
+3. Cropped and compressed pizza.png. The height of the image was far larger than width but only contained empty space.
+4. Use Gulp UnCSS to remove unused CSS from the bootstrap-grid.css file.
 
 ####Sources
 
